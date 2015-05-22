@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <script src="../lib/jquery/dist/jquery.js"></script>
+    <script>
+        jQuery('document').ready(function(){
+            var controlButton = jQuery('.controlButton');
+            window._music = jQuery('#music').get(0);
+            /*
+            var duration;
+            // Gets audio file duration
+            music.addEventListener("canplaythrough", function () {
+                duration = music.duration;
+            }, false);
+
+            music.addEventListener("timeupdate", timeUpdate, false);
+
+            function timeUpdate() {
+                var playPercent = 100 * (music.currentTime / duration);
+                console.log('playPercent:', playPercent);
+            }
+
+            console.log('controlButton', controlButton);
+            window.toggleAudio = function(){
+                console.log('toggleAudio isPlaying:', music.paused);
+                if(music.paused){
+                    music.play();
+                    controlButton.removeClass('playButton');
+                    controlButton.addClass('pauseButton');
+                }
+                else{
+                    music.pause();
+                    controlButton.removeClass('pauseButton');
+                    controlButton.addClass('playButton');
+                }
+
+            }
+            */
+        });
+    </script>
+
+</head>
+<body>
+
+<audio id="music" controls="controls">
+    <source src="interlude.ogg" type="audio/ogg" />
+</audio>
+
+</body>
+</html>
+

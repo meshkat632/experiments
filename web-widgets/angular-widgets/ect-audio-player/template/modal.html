@@ -1,0 +1,70 @@
+
+<div class="modal-header">
+  <h1 class="modal-title"></h1>
+    <ul class="example-animate-container">
+      <li class="animate-repeat error" ng-repeat="error in originalEvent.errors">
+        <strong>{{error}}</strong>
+      </li>
+    </ul>
+</div>
+<div class="modal-body">
+  <div class="row " >
+    <div class="col-md-12 ">
+      <form class="form-inline  force_padding_5">
+
+        <span class="form-group width-250" style="width:70px;"> Title</span>
+        <input class="form-control input-sm width-250" placeholder="title" ng-model="vm.event.title">
+        <!--<span class="form-group width-250  ">{{event.$guiModel$.uuid}}</span>-->
+        </input>
+      </form>
+    </div>
+  </div>
+  <div class="row " >
+    <div class="col-md-12">
+      <form class="form-inline  force_padding_5" name="myForm">
+        <span class="form-group width-250" style="width:70px;">{{getDayNanme(vm.event.day)}}</span>
+        <input class="form-control input-sm" placeholder="00:00:00" name="startTime" ng-minlength="8" ng-maxlength="8" ng-change="change()" ng-model="vm.event.start" style="width:70px;" ng-model-options="{ debounce: 250 }">
+        </input>
+        <span class="form-group"> - </span>
+        <input class="form-control input-sm" placeholder="00:00:00" name="endTime" ng-minlength="8" ng-maxlength="8" ng-change="change()" ng-model="vm.event.end" style="width:70px;" ng-model-options="{ debounce: 250 }">
+        </input>
+      </form>
+    </div>
+  </div>
+  <div class="row " >
+    <div class="col-md-12 ">
+      <div role="alert">
+      <span class="error" ng-show="myForm.startTime.$error.minlength">
+        startTime Too short!</span>
+      <span class="error" ng-show="myForm.startTime.$error.maxlength">
+        startTime Too long!</span>
+      <span class="error" ng-show="myForm.endTime.$error.minlength">
+        endTime Too short!</span>
+      <span class="error" ng-show="myForm.endTime.$error.maxlength">
+        endTime Too long!</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row " >
+    <div class="col-md-12 ">
+      <form class="form-inline  force_padding_5">
+        <span class="form-group" style="width:70px;">Type:</span>
+        <select class="form-control input-sm" ng-model="vm.event.color">
+          <option >red</option>
+          <option >blue</option>
+          <option >pink</option>
+          <option >green</option>
+        </select>
+      </form>
+    </div>
+  </div>
+
+
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()" >OKK</button>
+  <button class="btn btn-warning" ng-click="cancel()" >Cancel</button>
+</div>
+

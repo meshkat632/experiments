@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+
+
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="lib/fullcalendar/dist/fullcalendar.css">
+
+  <script src="lib/jquery/dist/jquery.js"></script>
+  <script src="lib/moment/moment.js"></script>
+  <script src="lib/fullcalendar/dist/fullcalendar.js"></script>
+  <script src="lib/angular/angular.js"></script>
+  <script src="js/ect-scheduler-directive.js"></script>
+  <script src="index.js"></script>
+
+
+</head>
+<body ng-app="calendarDemoApp" ng-controller="CalendarCtrl">
+  <ect-scheduler events="events" options="options" readonly="true"></ect-scheduler>
+</body>
+</html>

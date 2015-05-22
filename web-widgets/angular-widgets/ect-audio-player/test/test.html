@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+
+        #pButton{
+            height:60px;
+            width: 60px;
+            border: none;
+            background-size: 50% 50%;
+            background-position: center;
+            border: 1px dashed #d3d3d3;
+        }
+        .controlButton{
+
+            height:100px;
+            width: 100px;
+            border: none;
+            float: left;
+        }
+
+        .playButton{
+
+
+            background: url('../assets/play.png') no-repeat;
+            background-size: 50% 50%;
+            background-position: center;
+            background-color: #d3d3d3;
+
+
+        }
+        .pauseButton{
+
+
+            background: url('../assets/pause.png') no-repeat;
+            background-size: 50% 50%;
+            background-position: center;
+            background-color: #d3d3d3;
+
+        }
+        .timeline{
+            float: left;
+            box-sizing: border-box;
+            width: 200px;
+            height: 100px;
+            background: #d3d3d3;
+            border: 1px solid crimson;
+            /*
+            margin-top: 20px;
+            border-radius: 15px;
+            */
+        }
+
+        #playhead{
+
+
+            width: 18px;
+            height: 60px;
+            background: crimson;
+            box-sizing: border-box;
+            border: 2px solid red;
+            margin-left: 0%;
+            resize: horizontal;
+                /*
+                border-radius: 50%;
+                margin-top: 1px;
+                background: rgba(0, 255, 196, 0.82);
+                */
+
+        }
+        ._mydiv {
+             box-sizing: border-box;
+             border: 1px solid;
+             width: 150px;
+             height: 200px;
+             resize: none;
+             overflow: hidden;
+             display: block;
+         }
+        /*
+        .mydiv::after {
+            content: "a";
+            position: relative;
+            top: 0px;
+            left: 0px;
+            background: #900;
+            display: block;
+            width: 20px;
+            height: 20px;
+            cursor: w-resize;
+        }
+        */
+        ._mydiv::before {
+            /*content: url(http://www.w3schools.com/css/smiley.gif);*/
+            content: " ";
+            background: #900;
+
+            display: block;
+            width: 10px;
+            height: 100%;
+            position: relative;
+            top: 0px;
+            /*left: 80%;*/
+            margin-left: auto;
+            cursor: w-resize;
+            resize: both;
+        }
+        /*
+        body:before, body:after {
+            content: "";
+            position: fixed;
+            background: #900;
+            left: 0;
+            right: 0;
+            height: 10px;
+        }
+        body:before {
+            top: 0;
+        }
+        body:after {
+            bottom: 0;
+        }
+        body {
+            border-left: 10px solid #900;
+            border-right: 10px solid #900;
+        }
+        */
+
+        .mydiv {
+            position:relative;
+            background-color:#333;
+            /*
+            position:relative;
+            background-color:#333;
+            padding:20px; margin:20px;
+            float:left;
+            */
+            box-sizing: border-box;
+            border: 1px solid;
+            width: 150px;
+            height: 200px;
+            resize: none;
+            overflow: hidden;
+            display: block;
+            float:left;
+
+
+        }
+
+        .mydiv_span {
+            content:"";
+            display:block;
+            padding:5px;
+            background-color:#f60;
+            border:2px solid white;
+            position: absolute;
+            top:-2px;
+            right:-2px;
+            cursor: w-resize;
+        }
+
+
+    </style>
+    <script src="../lib/jquery/dist/jquery.js"></script>
+    <script>
+        jQuery('document').ready(function(){
+
+
+
+
+
+            var element = jQuery('.myDragable');
+
+            var startX = 0, startY = 0, x = 0, y = 0;
+
+
+            element.css({
+                position: 'relative',
+                border: '1px solid red',
+                backgroundColor: 'lightgrey',
+                cursor: 'pointer'
+            });
+
+            return;
+
+            element.on('mousedown', function(event) {
+
+                // Prevent default dragging of selected content
+                event.preventDefault();
+                startX = event.pageX - x;
+                startY = event.pageY - y;
+                /*
+                $document.on('mousemove', mousemove);
+                $document.on('mouseup', mouseup);
+                */
+            });
+
+            function mousemove(event) {
+                y = event.pageY - startY;
+                x = event.pageX - startX;
+                element.css({
+                    top: y + 'px',
+                    left:  x + 'px'
+                });
+            }
+
+            /*
+            function mouseup() {
+                $('document').off('mousemove', mousemove);
+                $('document').off('mouseup', mouseup);
+            }
+            */
+
+            /*
+
+            console.log('mydivs', mydivs);
+
+            $.each( mydivs, function( key, value ) {
+                console.log( key + ": ",value );
+                var parent = $(value);
+                var item = $('<span class="mydiv_span"></span>');
+                item.click(function() { console.log('click'); });
+                $(value).append(item);
+
+
+
+
+            });
+            */
+        });
+        /*
+        jQuery('document').ready(function(){
+            var controlButton = jQuery('.controlButton');
+            var music = jQuery('#music').get(0);
+            var duration;
+            // Gets audio file duration
+            music.addEventListener("canplaythrough", function () {
+                duration = music.duration;
+            }, false);
+
+            music.addEventListener("timeupdate", timeUpdate, false);
+
+            function timeUpdate() {
+                var playPercent = 100 * (music.currentTime / duration);
+                console.log('playPercent:', playPercent);
+            }
+
+            console.log('controlButton', controlButton);
+            window.toggleAudio = function(){
+                console.log('toggleAudio isPlaying:', music.paused);
+                if(music.paused){
+                    music.play();
+                    controlButton.removeClass('playButton');
+                    controlButton.addClass('pauseButton');
+                }
+                else{
+                    music.pause();
+                    controlButton.removeClass('pauseButton');
+                    controlButton.addClass('playButton');
+                }
+
+            }
+        });
+        */
+
+    </script>
+
+    <style>
+        /* Prevent the text contents of draggable elements from being selectable. */
+        [draggable] {
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            /* Required to make elements draggable in old WebKit */
+            -khtml-user-drag: element;
+            -webkit-user-drag: element;
+        }
+        .column {
+            height: 150px;
+            width: 150px;
+            float: left;
+            border: 2px solid #666666;
+            background-color: #ccc;
+            margin-right: 5px;
+            -webkit-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 3px #000;
+            -ms-box-shadow: inset 0 0 3px #000;
+            box-shadow: inset 0 0 3px #000;
+            text-align: center;
+
+        }
+        .column header {
+            color: #fff;
+            text-shadow: #000 0 1px;
+            box-shadow: 5px;
+            padding: 5px;
+            background: -moz-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+            background: -webkit-gradient(linear, left top, right top,
+            color-stop(0, rgb(0,0,0)),
+            color-stop(0.50, rgb(79,79,79)),
+            color-stop(1, rgb(21,21,21)));
+            background: -webkit-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+            background: -ms-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+            border-bottom: 1px solid #ddd;
+            -webkit-border-top-left-radius: 10px;
+            -moz-border-radius-topleft: 10px;
+            -ms-border-radius-topleft: 10px;
+            border-top-left-radius: 10px;
+            -webkit-border-top-right-radius: 10px;
+            -ms-border-top-right-radius: 10px;
+            -moz-border-radius-topright: 10px;
+            border-top-right-radius: 10px;
+            cursor: move;
+        }
+        .column.over {
+            border: 2px dashed #000;
+        }
+    </style>
+
+</head>
+<body>
+
+<audio id="music" controls="controls">
+    <source src="interlude.ogg" type="audio/ogg" />
+</audio>
+
+<div class="myDragable">hello</div>
+<!---
+<div class="mydiv"></div>
+<div class="audioplayer">
+<button class="controlButton playButton" onclick="toggleAudio()"></button>
+<div class="timeline">
+    <div id="playhead"></div>
+</div>
+</div>
+<audio id="music" controls="controls">
+    <source src="interlude.ogg" type="audio/ogg" />
+</audio>
+<div id="columns">
+    <div class="column" draggable="true"><header>A</header>a</div>
+    <div class="column" draggable="true"><header>B</header>b</div>
+    <div class="column" draggable="true"><header>C</header>c</div>
+</div>
+-->
+
+</body>
+</html>
+

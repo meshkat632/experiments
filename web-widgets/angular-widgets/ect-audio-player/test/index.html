@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example - example-example22-production</title>
+
+
+
+
+   <style>
+       .myDragable {
+            position: relative;
+            border: 1px solid red;
+            background-color: lightgrey;
+            cursor: pointer;
+       }
+       .myDragableConatiner{
+           border: 1px solid red;
+           background-color: #ffffff;
+           width: 200px;
+           height: 200px;
+           overflow: hidden;
+       }
+
+   </style>
+    <script src="../lib/jquery/dist/jquery.js"></script>
+    <script>
+        jQuery(document).ready(function(){
+            var startX = 0, startY = 0, x = 0, y = 0;
+            var element = jQuery('.myDragable');
+            var _document = jQuery('.myDragableConatiner');
+            var top = _document.position().top;
+            var left = _document.position().left;
+
+            _document.on('mousemove', function(event) {
+                //console.log('mousedown', left, top, event.pageX   , event.pageY  );
+
+                /*
+                element.css({
+                    top: (event.pageY-top) + 'px',
+                    left:  (event.pageX-left) + 'px'
+                });
+                */
+            });
+
+            _document.on('mouseenter', function(event) {
+                //console.log('mouseenter');
+            });
+            _document.on('mouseout', function(event) {
+                //console.log('mouseout');
+            });
+            element.on('mousedown', function(event) {
+                console.log('mousedown on element', left, top, event.pageX   , event.pageY  );
+                element.css({
+                    border: '2px dashed red'
+                });
+            });
+            element.on('mouseenter', function(event) {
+                console.log('mouseenter on element', left, top, event.pageX   , event.pageY  );
+                element.css({
+                    border: '2px solid red'
+                });
+            });
+            element.on('mouseleave', function(event) {
+                console.log('mouseout on element', left, top, event.pageX   , event.pageY  );
+                element.css({
+                    border: '1px solid red'
+                });
+            });
+            element.on('mouseup', function(event) {
+                console.log('mouseup on element', left, top, event.pageX   , event.pageY  );
+                //console.log('mousedown', left, top, event.pageX   , event.pageY  );
+
+
+                 element.css({
+                 top: (event.pageY-top) + 'px',
+                 left:  (event.pageX-left) + 'px'
+                 });
+                event.preventDefault();
+            });
+
+
+
+            /*
+
+            element.on('mousedown', function(event) {
+                event.preventDefault();
+                startX = event.pageX - x;
+                startY = event.pageY - y;
+                 console.log('mousedown', startX, startY);
+
+                _document.on('mousedown', mousemove);
+                _document.on('mouseup', mouseup);
+
+            });
+
+            function mousemove(event) {
+                console.log('mousemove', startX, startY);
+                y = event.pageY - startY;
+                x = event.pageX - startX;
+                element.css({
+                    top: y + 'px',
+                    left:  x + 'px'
+                });
+            }
+
+            function mouseup() {
+                _document.off('mousemove', mousemove);
+                _document.off('mouseup', mouseup);
+
+            }
+            */
+        });
+
+
+
+
+
+
+    </script>
+
+</head>
+<body >
+<div class="myDragableConatiner">
+    <span class="myDragable" draggable="true">Drag ME</span>
+</div>
+
+</body>
+</html>
